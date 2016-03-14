@@ -1,5 +1,6 @@
 import org.apache.lucene.analysis.Analyzer;
-import org.apache.lucene.analysis.standard.StandardAnalyzer;
+import org.apache.lucene.analysis.en.EnglishAnalyzer;
+import org.apache.lucene.analysis.snowball.SnowballAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
 import org.apache.lucene.document.StringField;
@@ -14,6 +15,7 @@ import org.apache.lucene.search.Query;
 import org.apache.lucene.search.ScoreDoc;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.RAMDirectory;
+import org.apache.lucene.util.Version;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -51,7 +53,7 @@ public class SPSS_Engine {
         values.add("saeid");
         types.add(F_TYPE_NOT_TOKENIZE);
         fields.add("body");
-        values.add("hello world");
+        values.add("go world");
         types.add(F_TYPE_TOKENIZE);
         try {
             spssEngine.addDoc(fields, values, types);
@@ -86,14 +88,16 @@ public class SPSS_Engine {
 
         System.out.println("===========((Start Searching))===========");
         try {
-            SPSS_Engine.showRes(spssEngine.search("WrIter: mOsi"));
+            SPSS_Engine.showRes(spssEngine.search("going"));
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public SPSS_Engine() {
-        analyzer = new StandardAnalyzer();
+    public SPSS_Engine() { // stem stop word
+//        analyzer = new StandardAnalyzer();
+        analyzer = new EnglishAnalyzer();
+//        analyzer = new SnowballAnalyzer(Version.LUCENE_5_5_0, "SPA");
         index = new RAMDirectory();
         IndexWriterConfig iwConfig = new IndexWriterConfig(analyzer);
         iw = null;
