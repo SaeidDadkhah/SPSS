@@ -124,6 +124,7 @@ public class SPSS_Engine {
                     d.add(new TextField(fields.get(i).toLowerCase(), values.get(i).toLowerCase(), Field.Store.YES));
                     break;
                 case F_TYPE_UNKNOWN:
+                    System.out.println(fields.get(i));
                     throw new Exception("Unknown Type: " + i);
 //                    break;
                 default:
@@ -163,6 +164,8 @@ public class SPSS_Engine {
             throw new Exception("Index Searcher is not open");
         Query q = null;
         try {
+            query = query.replaceAll("and", "AND");
+            query = query.replaceAll("and", "OR");
             q = new QueryParser("body", analyzer).parse(query);
             System.out.println(q);
         } catch (ParseException e) {
