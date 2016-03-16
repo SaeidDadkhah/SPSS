@@ -1,4 +1,6 @@
-package gui;
+package spss.gui;
+
+import spss.SPSS_Interface;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,7 +13,12 @@ public class SPSS_MainSearch extends JPanel {
 
     private static final int MID_SIZE = 350;
 
-    public SPSS_MainSearch() {
+    private SPSS_GUI spss_gui;
+
+    private JTextField tFQuery;
+
+    public SPSS_MainSearch(SPSS_GUI spss_gui) {
+        this.spss_gui = spss_gui;
         setLayout(new GridBagLayout());
         init();
     }
@@ -117,7 +124,7 @@ public class SPSS_MainSearch extends JPanel {
         gbc.ipadx = MID_SIZE;
         gbc.ipady = 0;
         gbc.insets = new Insets(0, 0, 20, 0);
-        JTextField tFQuery = new JTextField();
+        tFQuery = new JTextField();
         Font font = tFQuery.getFont().deriveFont((float) 20);
         tFQuery.setFont(font);
         pMiddle.add(tFQuery, gbc);

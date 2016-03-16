@@ -1,6 +1,7 @@
+package spss;
+
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.en.EnglishAnalyzer;
-import org.apache.lucene.analysis.snowball.SnowballAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
 import org.apache.lucene.document.StringField;
@@ -15,7 +16,6 @@ import org.apache.lucene.search.Query;
 import org.apache.lucene.search.ScoreDoc;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.RAMDirectory;
-import org.apache.lucene.util.Version;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -39,7 +39,7 @@ public class SPSS_Engine {
     private IndexSearcher is;
 
     public static void main(String[] args) {
-        System.out.println("===========((SPSS_Engine TEST))===========");
+        System.out.println("===========((spss.SPSS_Engine TEST))===========");
         SPSS_Engine spssEngine = new SPSS_Engine();
 
         System.out.println("===========((Adding 1st doc))===========");

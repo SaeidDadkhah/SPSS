@@ -1,5 +1,7 @@
-import gui.SPSS_GUI;
-import gui.SplashPage;
+package spss;
+
+import spss.gui.SPSS_GUI;
+import spss.gui.SplashPage;
 
 /**
  * Created by Saeid Dadkhah on 2016-03-14 5:19 PM.
@@ -20,7 +22,7 @@ public class SPSS {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-//        spssi = new SPSS_Interface();
+//        spssi = new spss.SPSS_Interface();
 //        spssi.addDoc("./files/comp.sys.ibm.pc.hardware");
         sp.closeSP();
         SPSS_GUI spss_gui = new SPSS_GUI();

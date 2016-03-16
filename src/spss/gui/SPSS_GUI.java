@@ -1,4 +1,7 @@
-package gui;
+package spss.gui;
+
+import org.apache.lucene.document.Document;
+import spss.SPSS_Interface;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,18 +12,16 @@ import java.awt.*;
  */
 public class SPSS_GUI extends JFrame {
 
-    public SPSS_GUI() {
+    private SPSS_Interface spss_interface;
+
+    public SPSS_GUI(SPSS_Interface spss_interface) {
+        this.spss_interface = spss_interface;
+
         for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
             if (info.getName().equals("Nimbus")) {
                 try {
                     UIManager.setLookAndFeel(info.getClassName());
-                } catch (ClassNotFoundException e) {
-                    e.printStackTrace();
-                } catch (InstantiationException e) {
-                    e.printStackTrace();
-                } catch (IllegalAccessException e) {
-                    e.printStackTrace();
-                } catch (UnsupportedLookAndFeelException e) {
+                } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
                     e.printStackTrace();
                 }
             }
@@ -35,7 +36,7 @@ public class SPSS_GUI extends JFrame {
 //        setResizable(false);
         setIconImage(new ImageIcon("./files/mainSearch.png").getImage());
 
-        spss_mainSearch = new SPSS_MainSearch();
+        spss_mainSearch = new SPSS_MainSearch(this);
         spss_mainSearch.setSize(getSize());
         spss_mainSearch.setPreferredSize(getSize());
         spss_mainSearch.setBackground(Color.WHITE);
@@ -60,7 +61,18 @@ public class SPSS_GUI extends JFrame {
         super.paint(g);
         try {
             spss_mainSearch.setSize(getSize());
-        } catch (NullPointerException npe) {
+        } catch (NullPointerException ignored) {
         }
     }
+
+    public void search(String query){
+        Document[] res = null;
+        try {
+            res = spss_interface.search(query);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } // TODO: 2016-03-16 show res!
+        System.out.println(query);
+    }
+
 }
