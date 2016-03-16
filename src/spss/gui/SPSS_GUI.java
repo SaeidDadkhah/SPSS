@@ -5,6 +5,8 @@ import spss.SPSS_Interface;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 /**
  * Created by Saeid Dadkhah on 2016-03-14 5:49 PM.
@@ -33,7 +35,7 @@ public class SPSS_GUI extends JFrame {
         Dimension ss = getToolkit().getScreenSize();
         setSize(5 * (int) ss.getWidth() / 7, 5 * (int) ss.getHeight() / 7);
         setLocation((int) ss.getWidth() / 7, (int) ss.getHeight() / 7);
-//        setResizable(false);
+        setResizable(false);
         setIconImage(new ImageIcon("./files/mainSearch.png").getImage());
 
         spss_mainSearch = new SPSS_MainSearch(this);
@@ -47,8 +49,6 @@ public class SPSS_GUI extends JFrame {
 //        spss_advancedSearch.setSize(getSize());
 //        spss_advancedSearch.setLocation(0, 0);
 //        getContentPane().add(spss_advancedSearch);
-
-//        init();
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
@@ -68,11 +68,10 @@ public class SPSS_GUI extends JFrame {
     public void search(String query){
         Document[] res = null;
         try {
-//            res = spss_interface.search(query);
+            res = spss_interface.search(query);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        res = new Document[3];
         new SPSS_Results(res);
     }
 

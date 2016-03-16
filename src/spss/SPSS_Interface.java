@@ -25,7 +25,7 @@ public class SPSS_Interface {
             for(Document doc: docs){
                 System.out.println(doc.get(SPSS_Fields.getName(SPSS_Fields.F_NAME_FILE_ADDRESS)));
 //                Desktop.getDesktop().open(new File(doc.get("file-address")));
-                ProcessBuilder pb = new ProcessBuilder("C:\\Program Files (x86)\\Sublime Text 3\\sublime_text.exe", doc.get("file-address"));
+//                ProcessBuilder pb = new ProcessBuilder("C:\\Program Files (x86)\\Sublime Text 3\\sublime_text.exe", doc.get("file-address"));
 //                pb.start();
             }
         } catch (Exception e) {

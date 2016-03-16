@@ -2,11 +2,15 @@ package spss.gui;
 
 import org.apache.lucene.document.Document;
 import spss.SPSS_Fields;
-import spss.SPSS_Interface;
 import spss.gui.component.Result;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.io.File;
+import java.io.IOException;
 
 /**
  * Created by Saeid Dadkhah on 2016-03-16 4:42 AM.
@@ -14,7 +18,7 @@ import java.awt.*;
  */
 public class SPSS_Results extends JDialog {
 
-    private static final int BASE_HEIGHT = 180;
+    private static final int BASE_HEIGHT = 159;
 
     private JPanel pMain;
 
@@ -162,6 +166,24 @@ public class SPSS_Results extends JDialog {
         gbc.weightx = 1;
         gbc.weighty = 0.5;
         pMain.add(new JLabel(), gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.gridwidth = 0;
+        gbc.gridheight = 0;
+        gbc.weightx = 0;
+        gbc.weighty = 0;
+        JTextField f = new JTextField();
+        f.setFocusCycleRoot(true);
+        f.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                super.keyPressed(e);
+                if(e.getKeyCode() == KeyEvent.VK_ESCAPE)
+                    SPSS_Results.this.dispose();
+            }
+        });
+        getContentPane().add(f, gbc);
     }
 
     private void showResults(Document[] results) {
@@ -179,9 +201,18 @@ public class SPSS_Results extends JDialog {
         gbc.weighty = 0;
         gbc.fill = GridBagConstraints.BOTH;
 
-        for (int i = 0; i < results.length; i++) {
-            pMain.add(new Result(this, results[i].get(SPSS_Fields.getName(SPSS_Fields.F_NAME_FILE_ADDRESS)),
-                    results[i].get(SPSS_Fields.getName(SPSS_Fields.F_NAME_BODY))), gbc);
+        KeyListener kl = new KeyAdapter() {
+            @Override
+            public void keyReleased(KeyEvent e) {
+                super.keyReleased(e);
+                if(e.getKeyCode() == KeyEvent.VK_ESCAPE)
+                    SPSS_Results.this.dispose();
+            }
+        };
+
+        for (Document result : results) {
+            pMain.add(new Result(this, kl, result.get(SPSS_Fields.getName(SPSS_Fields.F_NAME_FILE_ADDRESS)),
+                    result.get(SPSS_Fields.getName(SPSS_Fields.F_NAME_BODY))), gbc);
 
             gbc.gridx = 0;
             gbc.gridy++;
@@ -200,4 +231,14 @@ public class SPSS_Results extends JDialog {
         gbc.weighty = 1;
         pMain.add(new JLabel(), gbc);
     }
+
+    public void open(String fileAddress) {
+        System.out.println(fileAddress);
+        try {
+            Desktop.getDesktop().open(new File(fileAddress));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

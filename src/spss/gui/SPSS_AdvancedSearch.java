@@ -52,13 +52,13 @@ public class SPSS_AdvancedSearch extends JPanel {
             public void paint(Graphics g) {
                 super.paint(g);
 
-                g.drawImage((new ImageIcon("./Files/color.jpg")).getImage(), 0, 0, getWidth(), getHeight(), null);
+                g.drawImage((new ImageIcon("./Files/color.png")).getImage(), 0, 0, getWidth(), getHeight(), null);
             }
 
         };
         add(lHeaderColor, gbc);
 
-        gbc.insets = new Insets(2, 20, 2, 2);
+//        gbc.insets = new Insets(2, 20, 2, 2);
         gbc.gridx = 0;
         gbc.gridy = 1;
         gbc.weightx = 0;
@@ -114,7 +114,7 @@ public class SPSS_AdvancedSearch extends JPanel {
             public void paint(Graphics g) {
                 super.paint(g);
 
-                g.drawImage((new ImageIcon("./Files/background.jpg")).getImage(), 0, 0, getWidth(), getHeight(), null);
+                g.drawImage((new ImageIcon("./Files/background.png")).getImage(), 0, 0, getWidth(), getHeight(), null);
             }
 
         };

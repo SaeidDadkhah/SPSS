@@ -2,6 +2,8 @@ package spss.gui;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 /**
  * Created by Saeid Dadkhah on 2016-03-16 1:03 AM.
@@ -14,6 +16,7 @@ public class SPSS_MainSearch extends JPanel {
     private SPSS_GUI spss_gui;
 
     private JTextField tFQuery;
+    private JButton bSearch;
 
     public SPSS_MainSearch(SPSS_GUI spss_gui) {
         this.spss_gui = spss_gui;
@@ -125,6 +128,14 @@ public class SPSS_MainSearch extends JPanel {
         tFQuery = new JTextField();
         Font font = tFQuery.getFont().deriveFont((float) 20);
         tFQuery.setFont(font);
+        tFQuery.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                super.keyPressed(e);
+                if(e.getKeyCode() == KeyEvent.VK_ENTER)
+                    bSearch.doClick();
+            }
+        });
         pMiddle.add(tFQuery, gbc);
 
         gbc.gridx = 2;
@@ -163,7 +174,7 @@ public class SPSS_MainSearch extends JPanel {
         gbc.ipadx = 0;
         gbc.ipady = 0;
         gbc.insets = new Insets(0, 0, 0, 5);
-        JButton bSearch = new JButton("SPSearchS");
+        bSearch = new JButton("SPSearchS");
         Font font = bSearch.getFont().deriveFont((float) 20);
         bSearch.setFont(font);
         bSearch.setForeground(bColor);

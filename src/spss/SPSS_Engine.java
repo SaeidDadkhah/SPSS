@@ -174,6 +174,7 @@ public class SPSS_Engine {
             System.out.println(q);
         } catch (ParseException e) {
             e.printStackTrace();
+            return new Document[0];
         }
         ScoreDoc[] docs = is.search(q, HITS).scoreDocs;
         Document[] result = new Document[docs.length];

@@ -17,16 +17,17 @@ public class SPSS {
 
     public SPSS(){
         SplashPage sp = new SplashPage(500);
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            Thread.sleep(1000);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
         spssi = new spss.SPSS_Interface();
-//        spssi.addDoc("./files/comp.sys.ibm.pc.hardware");
+        spssi.addDoc("./files/comp.sys.ibm.pc.hardware");
         spssi.finishIndexing();
         sp.closeSP();
-        SPSS_GUI spss_gui = new SPSS_GUI(spssi);
+//        SPSS_GUI spss_gui =
+                new SPSS_GUI(spssi);
     }
 
 }
