@@ -56,6 +56,8 @@ public class SPSS_Fields {
     public static final int F_NAME_CONTENT_TRANSFER_ENCODING = 48;
     public static final int F_NAME_X_TO = 49;
     public static final int F_NAME_X_NEWS_READER = 50;
+    public static final int F_NAME_FILE_ADDRESS = 51;
+    public static final int F_NAME_BODY = 52;
 
     // Returns -1 if name is not valid
     public static int getId(String name) {
@@ -160,120 +162,127 @@ public class SPSS_Fields {
                 return F_NAME_X_TO;
             case "x-news-reader":
                 return F_NAME_X_NEWS_READER;
+            case "file-address":
+                return F_NAME_FILE_ADDRESS;
+            case "body":
+                return F_NAME_BODY;
             default:
                 return -1;
         }
     }
 
-    /**
-     * // Returns null if id is not valid.
-     * public static String getName(int id){
-     * switch(id){
-     * case F_NAME_PATH:
-     * return "path";
-     * case F_NAME_FROM:
-     * return "from";
-     * case F_NAME_NEWSGROUP:
-     * return "newsgroups";
-     * case F_NAME_SUBJECT:
-     * return "subject";
-     * case F_NAME_MESSAGE_ID:
-     * return "message-id";
-     * case F_NAME_X_XXMESSAGE_ID:
-     * return "x-xxmessage-id";
-     * case F_NAME_DATE:
-     * return "date";
-     * case F_NAME_X_XXDATE:
-     * return "x-xxdate";
-     * case F_NAME_ARTICLE_ID:
-     * return "article-i.d.";
-     * case F_NAME_ORGANIZATION:
-     * return "organization";
-     * case F_NAME_LINES:
-     * return "lines";
-     * case F_NAME_NNTP_POSTING_HOST:
-     * return "nntp-posting-host";
-     * case F_NAME_X_NEWREADER: // MAYBE X_NEWS_READER is required!
-     * return "x-newsreader";
-     * case F_NAME_XREF:
-     * return "xref";
-     * case F_NAME_EXPIRES:
-     * return "expires";
-     * case F_NAME_DISTRIBUTION:
-     * return "distribution";
-     * case F_NAME_KEYWORDS:
-     * return "keywords";
-     * case F_NAME_REFERENCES:
-     * return "references";
-     * case F_NAME_SENDER:
-     * return "sender";
-     * case F_NAME_REPLY_TO:
-     * return "reply-to";
-     * case F_NAME_IN_REPLY_TO:
-     * return "in-reply-to";
-     * case F_NAME_FOLLOW_UP:
-     * return "follow-up";
-     * case F_NAME_FOLLOW_UPS:
-     * return "follow-ups";
-     * case F_NAME_FOLLOWUP_TO:
-     * return "followup-to";
-     * case F_NAME_X_FOLLOWUP_TO:
-     * return "x-followup-to";
-     * case F_NAME_X_READER:
-     * return "x-reader";
-     * case F_NAME_X_MAILER:
-     * return "x-mailer";
-     * case F_NAME_SUMMARY:
-     * return "summary";
-     * case F_NAME_X_DISCLAIMER:
-     * return "x-disclaimer";
-     * case F_NAME_X_STANDARD_DISCLAIMER:
-     * return "x-standard-disclaimer";
-     * case F_NAME_ORIGINATOR:
-     * return "originator";
-     * case F_NAME_X_USERAGENT:
-     * return "x-useragent";
-     * case F_NAME_X_FTN_TO:
-     * return "x-ftn-to";
-     * case F_NAME_X_AUTH_USER:
-     * return "x-auth-user";
-     * case F_NAME_X_POSTED_FROM:
-     * return "x-posted-from";
-     * case F_NAME_NEWS_SOFTWARE:
-     * return "news-software";
-     * case F_NAME_X_NEWS_SOFTWARE:
-     * return "x-news-software";
-     * case F_NAME_X_GATED_BY:
-     * return "x-gated-by";
-     * case F_NAME_X_STATUS:
-     * return "x-status";
-     * case F_NAME_TEL:
-     * return "tel";
-     * case F_NAME_APPROVED:
-     * return "approved";
-     * case F_NAME_X_RECEIVED:
-     * return "x-received";
-     * case F_NAME_NNTP_SOFTWARE:
-     * return "nntp-software";
-     * case F_NAME_POSTING_FRONT_END:
-     * return "posting-front-end";
-     * case F_NAME_X_SUBLIMINAL_MESSAGE:
-     * return "x-subliminal-message";
-     * case F_NAME_MIME_VERSION:
-     * return "mime-version";
-     * case F_NAME_CONTENT_TYPE:
-     * return "content-type";
-     * case F_NAME_CONTENT_TRANSFER_ENCODING:
-     * return "content-transfer-encoding";
-     * case F_NAME_X_TO:
-     * return "x-to";
-     * case F_NAME_X_NEWS_READER:
-     * return "x-news-reader";
-     * default:
-     * return null;
-     * }
-     * }
-     */
+    // Returns null if id is not valid.
+    public static String getName(int id) {
+        switch (id) {
+            case F_NAME_PATH:
+                return "path";
+            case F_NAME_FROM:
+                return "from";
+            case F_NAME_NEWSGROUP:
+                return "newsgroups";
+            case F_NAME_SUBJECT:
+                return "subject";
+            case F_NAME_MESSAGE_ID:
+                return "message-id";
+            case F_NAME_X_XXMESSAGE_ID:
+                return "x-xxmessage-id";
+            case F_NAME_DATE:
+                return "date";
+            case F_NAME_X_XXDATE:
+                return "x-xxdate";
+            case F_NAME_ARTICLE_ID:
+                return "article-i.d.";
+            case F_NAME_ORGANIZATION:
+                return "organization";
+            case F_NAME_LINES:
+                return "lines";
+            case F_NAME_NNTP_POSTING_HOST:
+                return "nntp-posting-host";
+            case F_NAME_X_NEWREADER: // MAYBE X_NEWS_READER is required!
+                return "x-newsreader";
+            case F_NAME_XREF:
+                return "xref";
+            case F_NAME_EXPIRES:
+                return "expires";
+            case F_NAME_DISTRIBUTION:
+                return "distribution";
+            case F_NAME_KEYWORDS:
+                return "keywords";
+            case F_NAME_REFERENCES:
+                return "references";
+            case F_NAME_SENDER:
+                return "sender";
+            case F_NAME_REPLY_TO:
+                return "reply-to";
+            case F_NAME_IN_REPLY_TO:
+                return "in-reply-to";
+            case F_NAME_FOLLOW_UP:
+                return "follow-up";
+            case F_NAME_FOLLOW_UPS:
+                return "follow-ups";
+            case F_NAME_FOLLOWUP_TO:
+                return "followup-to";
+            case F_NAME_X_FOLLOWUP_TO:
+                return "x-followup-to";
+            case F_NAME_X_READER:
+                return "x-reader";
+            case F_NAME_X_MAILER:
+                return "x-mailer";
+            case F_NAME_SUMMARY:
+                return "summary";
+            case F_NAME_X_DISCLAIMER:
+                return "x-disclaimer";
+            case F_NAME_X_STANDARD_DISCLAIMER:
+                return "x-standard-disclaimer";
+            case F_NAME_ORIGINATOR:
+                return "originator";
+            case F_NAME_X_USERAGENT:
+                return "x-useragent";
+            case F_NAME_X_FTN_TO:
+                return "x-ftn-to";
+            case F_NAME_X_AUTH_USER:
+                return "x-auth-user";
+            case F_NAME_X_POSTED_FROM:
+                return "x-posted-from";
+            case F_NAME_NEWS_SOFTWARE:
+                return "news-software";
+            case F_NAME_X_NEWS_SOFTWARE:
+                return "x-news-software";
+            case F_NAME_X_GATED_BY:
+                return "x-gated-by";
+            case F_NAME_X_STATUS:
+                return "x-status";
+            case F_NAME_TEL:
+                return "tel";
+            case F_NAME_APPROVED:
+                return "approved";
+            case F_NAME_X_RECEIVED:
+                return "x-received";
+            case F_NAME_NNTP_SOFTWARE:
+                return "nntp-software";
+            case F_NAME_POSTING_FRONT_END:
+                return "posting-front-end";
+            case F_NAME_X_SUBLIMINAL_MESSAGE:
+                return "x-subliminal-message";
+            case F_NAME_MIME_VERSION:
+                return "mime-version";
+            case F_NAME_CONTENT_TYPE:
+                return "content-type";
+            case F_NAME_CONTENT_TRANSFER_ENCODING:
+                return "content-transfer-encoding";
+            case F_NAME_X_TO:
+                return "x-to";
+            case F_NAME_X_NEWS_READER:
+                return "x-news-reader";
+            case F_NAME_FILE_ADDRESS:
+                return "file-address";
+            case F_NAME_BODY:
+                return "body";
+            default:
+                return null;
+            }
+        }
+
 
     public static int getType(int id) {
         switch (id) {
@@ -376,6 +385,10 @@ public class SPSS_Fields {
             case F_NAME_X_TO:
                 return SPSS_Engine.F_TYPE_TOKENIZE;
             case F_NAME_X_NEWS_READER:
+                return SPSS_Engine.F_TYPE_TOKENIZE;
+            case F_NAME_FILE_ADDRESS:
+                return SPSS_Engine.F_TYPE_NOT_TOKENIZE;
+            case F_NAME_BODY:
                 return SPSS_Engine.F_TYPE_TOKENIZE;
             default:
                 return SPSS_Engine.F_TYPE_UNKNOWN;

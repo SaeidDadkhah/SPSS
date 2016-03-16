@@ -72,7 +72,7 @@ public class SPSS_GUI extends JFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        res = new Document[0];
+        res = new Document[3];
         new SPSS_Results(res);
     }
 

@@ -10,7 +10,6 @@ import java.util.ArrayList;
  * Project: SPSS
  */
 public class SPSS_Interface {
-
     SPSS_Engine spsse;
 
     public static void main(String[] args) {
@@ -24,7 +23,7 @@ public class SPSS_Interface {
             Document[] docs = spss_interface.search("X-Mailer:\"ELM\" AND body:hawk");
 //            spss.SPSS_Engine.showRes(docs);
             for(Document doc: docs){
-                System.out.println(doc.get("file-address"));
+                System.out.println(doc.get(SPSS_Fields.getName(SPSS_Fields.F_NAME_FILE_ADDRESS)));
 //                Desktop.getDesktop().open(new File(doc.get("file-address")));
                 ProcessBuilder pb = new ProcessBuilder("C:\\Program Files (x86)\\Sublime Text 3\\sublime_text.exe", doc.get("file-address"));
 //                pb.start();
@@ -63,7 +62,7 @@ public class SPSS_Interface {
                 ArrayList<String> values = new ArrayList<>();
                 ArrayList<Integer> types = new ArrayList<>();
 
-                fields.add("FILE-ADDRESS");
+                fields.add(SPSS_Fields.getName(SPSS_Fields.F_NAME_FILE_ADDRESS));
                 values.add(file.getPath());
                 types.add(SPSS_Engine.F_TYPE_NOT_TOKENIZE);
 
@@ -88,7 +87,7 @@ public class SPSS_Interface {
                 do {
                     body += line;
                 } while ((line = br.readLine()) != null);
-                fields.add("body");
+                fields.add(SPSS_Fields.getName(SPSS_Fields.F_NAME_BODY));
                 values.add(body);
                 types.add(SPSS_Engine.F_TYPE_TOKENIZE);
                 spsse.addDoc(fields, values, types);

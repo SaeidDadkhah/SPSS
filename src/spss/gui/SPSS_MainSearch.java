@@ -2,8 +2,6 @@ package spss.gui;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 /**
  * Created by Saeid Dadkhah on 2016-03-16 1:03 AM.
@@ -170,12 +168,7 @@ public class SPSS_MainSearch extends JPanel {
         bSearch.setFont(font);
         bSearch.setForeground(bColor);
         pDown.add(bSearch, gbc);
-        bSearch.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                spss_gui.search(tFQuery.getText());
-            }
-        });
+        bSearch.addActionListener(e -> spss_gui.search(tFQuery.getText()));
 
         gbc.gridx = 2;
         gbc.gridy = 0;

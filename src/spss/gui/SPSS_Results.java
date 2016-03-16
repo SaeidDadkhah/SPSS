@@ -1,6 +1,9 @@
 package spss.gui;
 
 import org.apache.lucene.document.Document;
+import spss.SPSS_Fields;
+import spss.SPSS_Interface;
+import spss.gui.component.Result;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,7 +14,7 @@ import java.awt.*;
  */
 public class SPSS_Results extends JDialog {
 
-    private static final int BASE_HEIGHT = 200;
+    private static final int BASE_HEIGHT = 180;
 
     private JPanel pMain;
 
@@ -27,8 +30,31 @@ public class SPSS_Results extends JDialog {
             noResult();
         else
             showResults(results);
+        finalizePMain();
 
         setVisible(true);
+    }
+
+    private void finalizePMain() {
+        GridBagConstraints gbc = new GridBagConstraints();
+
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.gridwidth = 10;
+        gbc.gridheight = 10;
+        gbc.weightx = 1;
+        gbc.weighty = 1;
+        gbc.gridheight = 1;
+        gbc.fill = GridBagConstraints.BOTH;
+        JPanel pBackground = new JPanel() {
+            @Override
+            public void paint(Graphics g) {
+                super.paint(g);
+                g.drawImage((new ImageIcon("./Files/background.png")).getImage(), 0, 0, getWidth(), getHeight(), null);
+            }
+        };
+        pBackground.setBackground(Color.BLACK);
+        pMain.add(pBackground, gbc);
     }
 
     private void init() {
@@ -73,7 +99,7 @@ public class SPSS_Results extends JDialog {
             public void paint(Graphics g) {
                 super.paint(g);
 
-                g.drawImage((new ImageIcon("./Files/color.jpg")).getImage(), 0, 0, getWidth(), getHeight(), null);
+                g.drawImage((new ImageIcon("./Files/color.png")).getImage(), 0, 0, getWidth(), getHeight(), null);
             }
 
         };
@@ -89,18 +115,6 @@ public class SPSS_Results extends JDialog {
         pMain.setBackground(Color.WHITE);
         pMain.setLayout(new GridBagLayout());
         getContentPane().add(pMain, gbc);
-
-        JLabel lBackground = new JLabel() {
-
-            @Override
-            public void paint(Graphics g) {
-                super.paint(g);
-
-                g.drawImage((new ImageIcon("./Files/background.jpg")).getImage(), 0, 0, getWidth(), getHeight(), null);
-            }
-
-        };
-        getContentPane().add(lBackground, gbc);
     }
 
     private void noResult() {
@@ -151,5 +165,39 @@ public class SPSS_Results extends JDialog {
     }
 
     private void showResults(Document[] results) {
+        GridBagConstraints gbc = new GridBagConstraints();
+
+        setSize(getWidth(), BASE_HEIGHT + (results.length - 1) * 50);
+        setLocation(getX(), getY() - (results.length - 1) * 25);
+        setResizable(false);
+
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.gridwidth = 1;
+        gbc.gridheight = 1;
+        gbc.weightx = 0;
+        gbc.weighty = 0;
+        gbc.fill = GridBagConstraints.BOTH;
+
+        for (int i = 0; i < results.length; i++) {
+            pMain.add(new Result(this, results[i].get(SPSS_Fields.getName(SPSS_Fields.F_NAME_FILE_ADDRESS)),
+                    results[i].get(SPSS_Fields.getName(SPSS_Fields.F_NAME_BODY))), gbc);
+
+            gbc.gridx = 0;
+            gbc.gridy++;
+            gbc.gridwidth = 1;
+            gbc.gridheight = 1;
+            gbc.weightx = 0;
+            gbc.weighty = 0;
+        }
+
+        gbc.gridx = 0;
+        gbc.gridy++;
+        gbc.gridwidth = 1;
+        gbc.gridheight = 1;
+        gbc.weightx = 0;
+        gbc.weighty = 0;
+        gbc.weighty = 1;
+        pMain.add(new JLabel(), gbc);
     }
 }
