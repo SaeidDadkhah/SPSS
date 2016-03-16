@@ -71,8 +71,8 @@ public class SPSS_GUI extends JFrame {
             res = spss_interface.search(query);
         } catch (Exception e) {
             e.printStackTrace();
-        } // TODO: 2016-03-16 show res!
-        System.out.println(query);
+        }
+        SPSS_Results spss_result = new SPSS_Results(res);
     }
 
 }

@@ -22,10 +22,10 @@ public class SPSS {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-//        spssi = new spss.SPSS_Interface();
+        spssi = new spss.SPSS_Interface();
 //        spssi.addDoc("./files/comp.sys.ibm.pc.hardware");
         sp.closeSP();
-        SPSS_GUI spss_gui = new SPSS_GUI();
+        SPSS_GUI spss_gui = new SPSS_GUI(spssi);
     }
 
 }
