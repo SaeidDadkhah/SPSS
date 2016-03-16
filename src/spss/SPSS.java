@@ -24,6 +24,7 @@ public class SPSS {
         }
         spssi = new spss.SPSS_Interface();
 //        spssi.addDoc("./files/comp.sys.ibm.pc.hardware");
+        spssi.finishIndexing();
         sp.closeSP();
         SPSS_GUI spss_gui = new SPSS_GUI(spssi);
     }

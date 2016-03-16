@@ -68,11 +68,12 @@ public class SPSS_GUI extends JFrame {
     public void search(String query){
         Document[] res = null;
         try {
-            res = spss_interface.search(query);
+//            res = spss_interface.search(query);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        SPSS_Results spss_result = new SPSS_Results(res);
+        res = new Document[0];
+        new SPSS_Results(res);
     }
 
 }
