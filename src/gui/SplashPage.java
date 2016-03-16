@@ -10,19 +10,21 @@ import java.awt.*;
 public class SplashPage extends JFrame implements Runnable {
 
     private int size;
-    private Thread thread;
 
     public SplashPage(int size) {
         this.size = size;
-        thread = new Thread(this);
+        Thread thread = new Thread(this);
         thread.start();
     }
 
     // TODO: 2016-03-14 change icon
     @Override
     public void run() {
+        setTitle("SPSS");
         setUndecorated(true);
         setLayout(null);
+
+        setIconImage(new ImageIcon("./files/mainSearch.png").getImage());
 
         setResizable(false);
         setSize(size, size);

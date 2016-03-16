@@ -35,7 +35,7 @@ public class SPSS_AdvancedSearch extends JPanel {
             public void paint(Graphics g) {
                 super.paint(g);
 
-                g.drawImage((new ImageIcon("./Files/Header.png")).getImage(), 0, 0, (int) (getHeight() * 2.5), getHeight(), null);
+                g.drawImage((new ImageIcon("./Files/header.png")).getImage(), 0, 0, (int) (getHeight() * 2.5), getHeight(), null);
             }
         };
         lHeader.setPreferredSize(new Dimension(200, 80));
