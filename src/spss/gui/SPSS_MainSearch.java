@@ -194,6 +194,7 @@ public class SPSS_MainSearch extends JPanel {
         bAdvancedSearch.setFont(font);
         bAdvancedSearch.setForeground(bColor);
         pDown.add(bAdvancedSearch, gbc);
+        bAdvancedSearch.addActionListener(e -> spss_gui.turnToAdvanced());
 
         gbc.gridx = 3;
         gbc.gridy = 0;

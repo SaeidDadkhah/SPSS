@@ -5,8 +5,6 @@ import spss.SPSS_Interface;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 
 /**
  * Created by Saeid Dadkhah on 2016-03-14 5:49 PM.
@@ -15,6 +13,8 @@ import java.awt.event.KeyEvent;
 public class SPSS_GUI extends JFrame {
 
     private SPSS_Interface spss_interface;
+    private SPSS_MainSearch spss_mainSearch;
+    private SPSS_AdvancedSearch spss_advancedSearch;
 
     public SPSS_GUI(SPSS_Interface spss_interface) {
         this.spss_interface = spss_interface;
@@ -35,26 +35,15 @@ public class SPSS_GUI extends JFrame {
         Dimension ss = getToolkit().getScreenSize();
         setSize(5 * (int) ss.getWidth() / 7, 5 * (int) ss.getHeight() / 7);
         setLocation((int) ss.getWidth() / 7, (int) ss.getHeight() / 7);
-        setResizable(false);
+//        setResizable(false);
         setIconImage(new ImageIcon("./files/mainSearch.png").getImage());
 
-        spss_mainSearch = new SPSS_MainSearch(this);
-        spss_mainSearch.setSize(getSize());
-        spss_mainSearch.setPreferredSize(getSize());
-        spss_mainSearch.setBackground(Color.WHITE);
-        spss_mainSearch.setLocation(0, 0);
-        getContentPane().add(spss_mainSearch);
-
-//        SPSS_AdvancedSearch spss_advancedSearch = new SPSS_AdvancedSearch();
-//        spss_advancedSearch.setSize(getSize());
-//        spss_advancedSearch.setLocation(0, 0);
-//        getContentPane().add(spss_advancedSearch);
+        turnToMain(false);
+        turnToAdvanced();
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
     }
-
-    SPSS_MainSearch spss_mainSearch;
 
     @Override
     public void paint(Graphics g) {
@@ -73,6 +62,29 @@ public class SPSS_GUI extends JFrame {
             e.printStackTrace();
         }
         new SPSS_Results(res);
+    }
+
+    public void turnToMain(boolean remove){
+        if(remove)
+            getContentPane().remove(spss_advancedSearch);
+        spss_mainSearch = new SPSS_MainSearch(this);
+        spss_mainSearch.setSize(getSize());
+        spss_mainSearch.setPreferredSize(getSize());
+        spss_mainSearch.setBackground(Color.WHITE);
+        spss_mainSearch.setLocation(0, 0);
+        getContentPane().add(spss_mainSearch);
+        setSize(getWidth(), getHeight() - 1);
+        repaint();
+    }
+
+    public void turnToAdvanced(){
+        getContentPane().remove(spss_mainSearch);
+        spss_advancedSearch = new SPSS_AdvancedSearch(this);
+        spss_advancedSearch.setSize((int) getSize().getWidth() - 16, (int) getSize().getHeight() - 38);
+        spss_advancedSearch.setLocation(0, 0);
+        getContentPane().add(spss_advancedSearch);
+        setSize(getWidth(), getHeight() + 1);
+        repaint();
     }
 
 }
