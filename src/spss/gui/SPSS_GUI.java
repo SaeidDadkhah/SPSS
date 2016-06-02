@@ -5,6 +5,7 @@ import spss.SPSS_Interface;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 
 /**
  * Created by Saeid Dadkhah on 2016-03-14 5:49 PM.
@@ -29,13 +30,13 @@ public class SPSS_GUI extends JFrame {
             }
         }
 
-        setTitle("SPSS");
+        setTitle("SPSS®");
         setLayout(null);
 
         Dimension ss = getToolkit().getScreenSize();
         setSize(5 * (int) ss.getWidth() / 7, 5 * (int) ss.getHeight() / 7);
         setLocation((int) ss.getWidth() / 7, (int) ss.getHeight() / 7);
-//        setResizable(false);
+        setResizable(false);
         setIconImage(new ImageIcon("./files/mainSearch.png").getImage());
 
         turnToMain(false);
@@ -54,7 +55,7 @@ public class SPSS_GUI extends JFrame {
         }
     }
 
-    public void search(String query){
+    public void search(String query) {
         Document[] res = null;
         try {
             res = spss_interface.search(query);
@@ -64,8 +65,8 @@ public class SPSS_GUI extends JFrame {
         new SPSS_Results(res);
     }
 
-    public void turnToMain(boolean remove){
-        if(remove)
+    public void turnToMain(boolean remove) {
+        if (remove)
             getContentPane().remove(spss_advancedSearch);
         spss_mainSearch = new SPSS_MainSearch(this);
         spss_mainSearch.setSize(getSize());
@@ -73,18 +74,26 @@ public class SPSS_GUI extends JFrame {
         spss_mainSearch.setBackground(Color.WHITE);
         spss_mainSearch.setLocation(0, 0);
         getContentPane().add(spss_mainSearch);
-        setSize(getWidth(), getHeight() - 1);
-        repaint();
+        this.dispatchEvent(new ActionEvent(this, ActionEvent.RESERVED_ID_MAX + 1, null));
     }
 
-    public void turnToAdvanced(){
+    public void turnToAdvanced() {
         getContentPane().remove(spss_mainSearch);
         spss_advancedSearch = new SPSS_AdvancedSearch(this);
-        spss_advancedSearch.setSize((int) getSize().getWidth() - 16, (int) getSize().getHeight() - 38);
+        spss_advancedSearch.setSize((int) getSize().getWidth() - 6, (int) getSize().getHeight() - 28);
         spss_advancedSearch.setLocation(0, 0);
         getContentPane().add(spss_advancedSearch);
-        setSize(getWidth(), getHeight() + 1);
-        repaint();
+        this.dispatchEvent(new ActionEvent(this, ActionEvent.RESERVED_ID_MAX + 1, null));
     }
 
+    @Override
+    protected void processEvent(AWTEvent e) {
+        super.processEvent(e);
+        switch (e.getID()) {
+            case ActionEvent.RESERVED_ID_MAX + 1:
+                setSize(getWidth(), getHeight() - 1);
+                setSize(getWidth(), getHeight() + 1);
+                repaint();
+        }
+    }
 }

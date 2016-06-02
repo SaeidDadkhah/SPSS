@@ -59,6 +59,8 @@ public class SPSS_Fields {
     public static final int F_NAME_FILE_ADDRESS = 51;
     public static final int F_NAME_BODY = 52;
 
+    public static final int NUM_OF_FIELDS = 53;
+
     // Returns -1 if name is not valid
     public static int getId(String name) {
         switch (name) {

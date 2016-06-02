@@ -24,7 +24,7 @@ public class SPSS_Results extends JDialog {
 
     public SPSS_Results(Document[] results) {
         setModal(true);
-        setTitle("SPSS: Result");
+        setTitle("SPSS®: Result");
         setIconImage(new ImageIcon("./files/mainSearch.png").getImage());
 
         setLayout(new GridBagLayout());

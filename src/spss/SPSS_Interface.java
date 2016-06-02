@@ -34,7 +34,7 @@ public class SPSS_Interface {
     }
 
     public SPSS_Interface() {
-        spsse = new SPSS_Engine();
+        spsse = new SPSS_Engine(SPSS_Engine.MODE_INDEX);
     }
 
     public int addDoc(String file) {
